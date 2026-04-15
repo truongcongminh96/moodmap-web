@@ -19,6 +19,18 @@ function buildDevProxyPath(city: string) {
   return `${DEV_PROXY_PREFIX}/api/v1/mood-pack?${params.toString()}`;
 }
 
+function shouldUseSameOriginProxy(baseUrl: string) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  try {
+    return window.location.origin !== new URL(baseUrl).origin;
+  } catch {
+    return false;
+  }
+}
+
 async function requestMoodPack(url: string, signal?: AbortSignal) {
   const response = await fetch(url, {
     method: "GET",
@@ -47,6 +59,10 @@ export async function fetchMoodPack(
 ): Promise<MoodPackData> {
   if (!API_BASE_URL) {
     throw new Error("VITE_API_BASE_URL is not configured.");
+  }
+
+  if (shouldUseSameOriginProxy(API_BASE_URL)) {
+    return requestMoodPack(buildDevProxyPath(city), signal);
   }
 
   const liveUrl = buildMoodPackUrl(city, API_BASE_URL);

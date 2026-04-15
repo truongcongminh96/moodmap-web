@@ -163,9 +163,21 @@ VITE_API_BASE_URL=https://moodmap-api-truongcongminh1110-hfn4tcbl.apn.leapcell.d
 
 Nếu cần đổi API backend, chỉ cần sửa giá trị `VITE_API_BASE_URL`.
 
-## Ghi chú cho môi trường dev
+## Ghi chú về proxy và CORS
 
-Backend hiện tại có thể không mở CORS trực tiếp cho browser. Vì vậy frontend đã được cấu hình fallback qua Vite proxy trong môi trường development để local app vẫn gọi API ổn định.
+Backend hiện tại không mở CORS trực tiếp cho browser. Vì vậy frontend đã được cấu hình gọi qua same-origin proxy path:
+
+```text
+/__moodmap_api/api/v1/mood-pack?city=${city}&source=all
+```
+
+Chi tiết theo môi trường:
+
+- local `vite dev`: dùng proxy trong `vite.config.ts`
+- local `vite preview`: dùng proxy trong `vite.config.ts`
+- deploy trên Vercel: dùng rewrite trong [vercel.json](/Users/truongcongminh96/MinMin/Code/Projects/moodmap-web/vercel.json)
+
+Điều này giúp frontend tránh lỗi CORS khi app và backend nằm ở hai origin khác nhau.
 
 ## Hướng mở rộng sau MVP
 

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/__moodmap_api/:path*",
+      "destination": "https://moodmap-api-truongcongminh1110-hfn4tcbl.apn.leapcell.dev/:path*"
+    }
+  ]
+}
