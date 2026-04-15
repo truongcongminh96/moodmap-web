@@ -5,11 +5,13 @@ import {
 } from "@ant-design/icons";
 import { Card, Col, Row, Typography } from "antd";
 import type { ReactNode } from "react";
+import type { UiCopy } from "../i18n/translations";
 import type { MoodPackData } from "../types/mood";
 
 const { Text } = Typography;
 
 interface QuickStatsRowProps {
+  copy: UiCopy;
   data: MoodPackData;
 }
 
@@ -19,11 +21,11 @@ interface QuickStatItem {
   value: string;
 }
 
-function formatTemperature(value?: number) {
-  return typeof value === "number" ? `${value.toFixed(1)}°C` : "N/A";
+function formatTemperature(value: number | undefined, fallback: string) {
+  return typeof value === "number" ? `${value.toFixed(1)}°C` : fallback;
 }
 
-export function QuickStatsRow({ data }: QuickStatsRowProps) {
+export function QuickStatsRow({ copy, data }: QuickStatsRowProps) {
   const location = data.location;
   const mood = data.mood;
   const weather = data.weather;
@@ -31,18 +33,18 @@ export function QuickStatsRow({ data }: QuickStatsRowProps) {
   const items: QuickStatItem[] = [
     {
       icon: <EnvironmentOutlined />,
-      label: "Mapped Location",
-      value: `${location?.city ?? "Unknown City"}, ${location?.country ?? "Unknown"}`,
+      label: copy.quickStats.mappedLocation,
+      value: `${location?.city ?? copy.common.unknownCity}, ${location?.country ?? copy.common.unknown}`,
     },
     {
       icon: <HeartOutlined />,
-      label: "Current Mood",
-      value: mood?.label ?? "Pending mood",
+      label: copy.quickStats.currentMood,
+      value: mood?.label ?? copy.common.pendingMood,
     },
     {
       icon: <CloudOutlined />,
-      label: "Atmosphere",
-      value: `${weather?.main ?? "Weather pending"} · ${formatTemperature(weather?.temperature)}`,
+      label: copy.quickStats.atmosphere,
+      value: `${weather?.main ?? copy.common.weatherPending} · ${formatTemperature(weather?.temperature, copy.common.unavailable)}`,
     },
   ];
 

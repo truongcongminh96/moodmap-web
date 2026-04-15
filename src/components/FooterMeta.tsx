@@ -1,16 +1,19 @@
 import { ClockCircleOutlined, DatabaseOutlined } from "@ant-design/icons";
 import { Card, Tag, Typography } from "antd";
+import type { UiCopy } from "../i18n/translations";
 import type { MoodMeta } from "../types/mood";
 
 const { Paragraph, Text } = Typography;
 
 interface FooterMetaProps {
+  copy: UiCopy;
+  locale: string;
   meta?: MoodMeta;
 }
 
-function formatDate(value?: string) {
+function formatDate(value: string | undefined, locale: string, fallback: string) {
   if (!value) {
-    return "Waiting for a live timestamp";
+    return fallback;
   }
 
   const date = new Date(value);
@@ -19,7 +22,7 @@ function formatDate(value?: string) {
     return value;
   }
 
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(locale, {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(date);
@@ -32,27 +35,30 @@ function formatSource(source: string) {
     .join(" ");
 }
 
-export function FooterMeta({ meta }: FooterMetaProps) {
+export function FooterMeta({ copy, locale, meta }: FooterMetaProps) {
   const sources = meta?.sources ?? [];
 
   return (
     <Card bordered={false} className="glass-card footer-card fade-up delay-7">
       <div className="footer-meta">
         <div className="footer-copy">
-          <Text className="card-kicker">Sources</Text>
+          <Text className="card-kicker">{copy.footer.kicker}</Text>
           <Paragraph className="footer-note">
-            Powered by weather, quotes, and music.
+            {copy.footer.note}
           </Paragraph>
           <div className="footer-line">
             <ClockCircleOutlined />
-            <span>{formatDate(meta?.requestedAt)}</span>
+            <span>
+              {copy.footer.timestampLabel}:{" "}
+              {formatDate(meta?.requestedAt, locale, copy.footer.waitingTimestamp)}
+            </span>
           </div>
         </div>
 
         <div className="footer-tags">
           <div className="footer-line footer-line-title">
             <DatabaseOutlined />
-            <span>Connected sources</span>
+            <span>{copy.footer.connectedSources}</span>
           </div>
           <div className="tag-row">
             {sources.length > 0 ? (
@@ -62,7 +68,7 @@ export function FooterMeta({ meta }: FooterMetaProps) {
                 </Tag>
               ))
             ) : (
-              <Tag className="source-tag">No sources listed</Tag>
+              <Tag className="source-tag">{copy.footer.noSources}</Tag>
             )}
           </div>
         </div>

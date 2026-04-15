@@ -10,11 +10,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#90b7ff",
-          colorText: "#f7f9ff",
-          colorTextSecondary: "rgba(214, 225, 255, 0.7)",
-          colorBgContainer: "rgba(255, 255, 255, 0.04)",
-          colorBorderSecondary: "rgba(255, 255, 255, 0.1)",
+          colorPrimary: "var(--accent)",
+          colorText: "var(--text-strong)",
+          colorTextSecondary: "var(--text-soft)",
+          colorTextTertiary: "var(--text-muted)",
+          colorBgContainer: "var(--card-background)",
+          colorBgElevated: "var(--card-background-strong)",
+          colorBorderSecondary: "var(--card-border)",
+          colorFillSecondary: "var(--tile-tint)",
           borderRadius: 24,
           borderRadiusLG: 28,
           fontFamily:

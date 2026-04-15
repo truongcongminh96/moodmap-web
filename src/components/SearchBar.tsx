@@ -5,10 +5,12 @@ import {
 } from "@ant-design/icons";
 import { Button, Input, Select } from "antd";
 import type { FormEvent } from "react";
+import type { UiCopy } from "../i18n/translations";
 import type { MoodSceneSelection } from "../theme/moodScene";
 
 interface SearchBarProps {
   city: string;
+  copy: UiCopy;
   loading: boolean;
   sceneMenuOpen: boolean;
   moodSceneSelection: MoodSceneSelection;
@@ -21,6 +23,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   city,
+  copy,
   loading,
   sceneMenuOpen,
   moodSceneSelection,
@@ -39,17 +42,17 @@ export function SearchBar({
     <div className="search-shell">
       <form className="search-form" onSubmit={handleSubmit}>
         <Input
-          aria-label="City name"
+          aria-label={copy.search.cityAriaLabel}
           className="search-input"
           value={city}
           onChange={(event) => onCityChange(event.target.value)}
-          placeholder="Enter a city to reveal its mood"
+          placeholder={copy.search.cityPlaceholder}
           prefix={<EnvironmentOutlined />}
           autoComplete="off"
           allowClear
         />
         <Select
-          aria-label="Mood scene"
+          aria-label={copy.search.sceneAriaLabel}
           className="scene-select"
           open={sceneMenuOpen}
           value={moodSceneSelection}
@@ -71,7 +74,7 @@ export function SearchBar({
           disabled={loading}
           icon={!loading ? <ArrowRightOutlined /> : undefined}
         >
-          {loading ? "Revealing..." : "Reveal Mood"}
+          {loading ? copy.search.submitting : copy.search.submit}
         </Button>
       </form>
     </div>
