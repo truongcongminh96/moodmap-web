@@ -65,10 +65,28 @@ export interface UiCopy {
     kicker: string;
     fallbackText: string;
   };
+  timeOfDay: {
+    kicker: string;
+    localTime: string;
+    soundtrackMode: string;
+    morning: string;
+    midday: string;
+    goldenHour: string;
+    night: string;
+    morningNote: string;
+    middayNote: string;
+    goldenHourNote: string;
+    nightNote: string;
+    morningSoundtrack: string;
+    middaySoundtrack: string;
+    goldenHourSoundtrack: string;
+    nightSoundtrack: string;
+  };
   music: {
     kicker: string;
     title: string;
     empty: string;
+    openTrack: string;
   };
   story: {
     kicker: string;
@@ -204,10 +222,28 @@ export const translations: Record<LocaleCode, UiCopy> = {
       fallbackText:
         "A thoughtful line will appear here when the mood pack arrives.",
     },
+    timeOfDay: {
+      kicker: "Time Layer",
+      localTime: "Local time",
+      soundtrackMode: "Soundtrack mode",
+      morning: "Morning",
+      midday: "Midday",
+      goldenHour: "Golden Hour",
+      night: "Night",
+      morningNote: "A softer glow with a cleaner lift, tuned for an easier start.",
+      middayNote: "Brighter contrast and more open air, built for momentum and clarity.",
+      goldenHourNote: "Warmer edges and amber light, made for slower scenes and richer atmosphere.",
+      nightNote: "Deeper tones and quieter pacing, tuned for reflective listening.",
+      morningSoundtrack: "Leaning toward lighter rhythm and clean focus.",
+      middaySoundtrack: "Pushing brighter energy and clearer pulse.",
+      goldenHourSoundtrack: "Favoring warmer grooves and a softer landing.",
+      nightSoundtrack: "Favoring slower textures and more spacious tones.",
+    },
     music: {
       kicker: "Music Recommendations",
       title: "Soundtrack for the moment",
       empty: "No tracks found",
+      openTrack: "Open track",
     },
     story: {
       kicker: "City Atmosphere",
@@ -360,10 +396,28 @@ export const translations: Record<LocaleCode, UiCopy> = {
       fallbackText:
         "Một câu nói phù hợp sẽ xuất hiện ở đây khi mood pack được tải về.",
     },
+    timeOfDay: {
+      kicker: "Lớp thời gian",
+      localTime: "Giờ hiện tại",
+      soundtrackMode: "Chế độ soundtrack",
+      morning: "Buổi sáng",
+      midday: "Ban ngày",
+      goldenHour: "Giờ vàng",
+      night: "Ban đêm",
+      morningNote: "Ánh sáng ấm hơn một chút và nhịp mở đầu dễ chịu hơn cho buổi sáng.",
+      middayNote: "Độ sáng cao hơn, không khí mở hơn, hợp với nhịp tập trung và chuyển động.",
+      goldenHourNote: "Viền màu hổ phách và chất liệu dịu hơn, hợp với những khoảnh khắc chậm lại.",
+      nightNote: "Tông sâu hơn và tiết tấu lặng hơn, hợp để nghe và cảm nhận kỹ hơn.",
+      morningSoundtrack: "Ưu tiên nhịp sáng, gọn và dễ khởi động.",
+      middaySoundtrack: "Đẩy năng lượng sáng hơn và pulse rõ hơn.",
+      goldenHourSoundtrack: "Nghiêng về groove ấm và cảm giác hạ nhịp mềm hơn.",
+      nightSoundtrack: "Nghiêng về texture chậm và không gian nghe sâu hơn.",
+    },
     music: {
       kicker: "Gợi ý âm nhạc",
       title: "Nhạc nền cho khoảnh khắc này",
       empty: "Chưa có bản nhạc phù hợp",
+      openTrack: "Mở track",
     },
     story: {
       kicker: "Khí quyển thành phố",

@@ -1,67 +1,67 @@
 # MoodMap
 
-MoodMap là một ứng dụng web giúp người dùng "đọc tâm trạng" của một thành phố trong ngày hôm đó thông qua thời tiết, âm nhạc, quote truyền cảm hứng và gợi ý hoạt động phù hợp.
+MoodMap is a web app that helps users "read the mood" of a city for the day through weather, music, inspirational quotes, and activity suggestions.
 
-Ý tưởng được thiết kế theo tinh thần hackathon: dễ demo, trực quan, có tính sản phẩm, và đủ không gian để làm UI thật đẹp.
+The idea was designed with a hackathon mindset: easy to demo, visually engaging, product-oriented, and flexible enough to support a polished UI.
 
 ## Global Hack Week Idea
 
 ### Concept
 
-Người dùng nhập tên một thành phố, hệ thống sẽ:
+Users enter a city name, and the system will:
 
-- lấy dữ liệu thời tiết
-- lấy thêm dữ liệu quote, âm nhạc hoặc nội dung liên quan
-- áp dụng business logic để suy ra "mood" của thành phố
-- trả về một `mood pack` hoàn chỉnh cho ngày hôm đó
+- fetch weather data
+- fetch additional content such as quotes, music, or related recommendations
+- apply business logic to infer the city's "mood"
+- return a complete `mood pack` for that day
 
-Ví dụ:
+Example:
 
-> Hà Nội hôm nay mưa nhẹ -> mood: chill, reflective  
-> Gợi ý: 3 bài nhạc, 1 quote, 1 hoạt động nên làm
+> Hanoi has light rain today -> mood: chill, reflective  
+> Suggestions: 3 songs, 1 quote, 1 recommended activity
 
-## Vì sao ý tưởng này hợp hackathon
+## Why This Idea Fits a Hackathon
 
-- Rất trực quan, người xem demo hiểu ngay trong vài giây
-- Có API integration rõ ràng và dễ giải thích
-- Có business logic thú vị: weather -> mood -> recommendations
-- Dễ đầu tư phần frontend để tạo cảm giác sản phẩm cao cấp
-- Ảnh chụp màn hình đẹp, hợp để pitch và submit
+- Very easy to understand in a live demo within a few seconds
+- Clear and explainable API integration
+- Interesting business logic: weather -> mood -> recommendations
+- Easy to invest in the frontend and create a premium product feel
+- Great visuals for screenshots, pitching, and submissions
 
 ## MVP
 
-Phiên bản tối thiểu của MoodMap gồm:
+The minimum version of MoodMap includes:
 
-- nhập tên thành phố
-- lấy dữ liệu thời tiết theo thành phố
-- mapping thời tiết sang mood
-- trả về:
-  - mood label
-  - quote
-  - danh sách nhạc gợi ý
-  - activity suggestion
+- entering a city name
+- fetching weather data by city
+- mapping weather conditions to a mood
+- returning:
+  - a mood label
+  - a quote
+  - a list of recommended songs
+  - an activity suggestion
 
-## API Có Thể Dùng
+## APIs You Can Use
 
 - OpenWeather API
-- Spotify API hoặc Last.fm API
-- ZenQuotes API hoặc Quotable API
+- Spotify API or Last.fm API
+- ZenQuotes API or Quotable API
 
-Trong repo frontend hiện tại, app đang gọi backend MoodMap API thông qua biến môi trường:
+In the current frontend repository, the app calls the MoodMap backend API through the following environment variable:
 
 ```env
 VITE_API_BASE_URL=https://moodmap-api-truongcongminh1110-hfn4tcbl.apn.leapcell.dev
 ```
 
-Endpoint được frontend sử dụng:
+Endpoint used by the frontend:
 
 ```text
 GET ${VITE_API_BASE_URL}/api/v1/mood-pack?city=${city}&source=all
 ```
 
-## Mood Pack Trả Về
+## Mood Pack Response
 
-Frontend hiển thị một "Mood Dashboard" từ dữ liệu backend, bao gồm:
+The frontend renders a "Mood Dashboard" from backend data, including:
 
 - location
 - weather
@@ -70,31 +70,31 @@ Frontend hiển thị một "Mood Dashboard" từ dữ liệu backend, bao gồm
 - music recommendations
 - activities
 - summary
-- metadata và sources
+- metadata and sources
 
-Ví dụ trải nghiệm:
+Example experience:
 
-- Thành phố: Hanoi
+- City: Hanoi
 - Weather: broken clouds
 - Mood: Calm & Soft
-- Summary: một ngày nhẹ, hợp để đọc sách, lên kế hoạch, nghe nhạc nền dịu
+- Summary: a gentle day for reading, planning, and listening to soft background music
 
-## Tính năng frontend hiện tại
+## Current Frontend Features
 
-- Hero section đậm chất product landing page
-- Search bar đẹp, nhập tên thành phố và bấm Enter để fetch
-- Tự động load `Hanoi` khi mở app
-- Giữ lại dữ liệu cũ khi đang loading request mới
-- Skeleton loading cho trạng thái đầu
-- Error state bằng Ant Design `Result`
-- Dashboard gồm:
+- Hero section with a product-style landing page feel
+- Polished search bar that fetches data when users press Enter
+- Automatically loads `Hanoi` on first visit
+- Keeps previous data visible while a new request is loading
+- Skeleton loading state for the initial fetch
+- Error state using Ant Design `Result`
+- Dashboard sections:
   - quick info row
   - mood overview card
   - quote card
   - weather card
   - music section
   - activities card
-  - footer meta
+  - footer metadata
 
 ## Tech Stack
 
@@ -104,7 +104,7 @@ Ví dụ trải nghiệm:
 - Ant Design
 - Modern CSS
 
-## Cấu trúc thư mục chính
+## Main Folder Structure
 
 ```text
 src/
@@ -127,70 +127,70 @@ src/
     FooterMeta.tsx
 ```
 
-## Chạy local
+## Run Locally
 
-### 1. Cài dependencies
+### 1. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Chạy dev server
+### 2. Start the development server
 
 ```bash
 npm run dev
 ```
 
-### 3. Build production
+### 3. Build for production
 
 ```bash
 npm run build
 ```
 
-### 4. Preview production build
+### 4. Preview the production build
 
 ```bash
 npm run preview
 ```
 
-## Cấu hình API
+## API Configuration
 
-Tạo file `.env` với nội dung:
+Create a `.env` file with:
 
 ```env
 VITE_API_BASE_URL=https://moodmap-api-truongcongminh1110-hfn4tcbl.apn.leapcell.dev
 ```
 
-Nếu cần đổi API backend, chỉ cần sửa giá trị `VITE_API_BASE_URL`.
+If you need to switch the backend API, simply update the value of `VITE_API_BASE_URL`.
 
-## Ghi chú về proxy và CORS
+## Proxy and CORS Notes
 
-Backend hiện tại không mở CORS trực tiếp cho browser. Vì vậy frontend đã được cấu hình gọi qua same-origin proxy path:
+The current backend does not allow direct browser CORS access. Because of that, the frontend is configured to call the API through a same-origin proxy path:
 
 ```text
 /__moodmap_api/api/v1/mood-pack?city=${city}&source=all
 ```
 
-Chi tiết theo môi trường:
+Environment-specific details:
 
-- local `vite dev`: dùng proxy trong `vite.config.ts`
-- local `vite preview`: dùng proxy trong `vite.config.ts`
-- deploy trên Vercel: dùng rewrite trong [vercel.json](/Users/truongcongminh96/MinMin/Code/Projects/moodmap-web/vercel.json)
+- local `vite dev`: uses the proxy configured in `vite.config.ts`
+- local `vite preview`: uses the proxy configured in `vite.config.ts`
+- deploy on Vercel: uses the rewrite defined in [vercel.json](/Users/staff-atherlabs/MinMin/Projects/moodmap-web/vercel.json)
 
-Điều này giúp frontend tránh lỗi CORS khi app và backend nằm ở hai origin khác nhau.
+This setup helps the frontend avoid CORS issues when the app and backend run on different origins.
 
-## Hướng mở rộng sau MVP
+## Possible Extensions After MVP
 
-- thêm mood themes phong phú hơn
-- thêm movie/book suggestions
-- cá nhân hóa theo thời gian trong ngày
-- AI-generated summary tinh tế hơn
-- lưu lịch sử mood của các thành phố
-- chia sẻ mood card lên social
+- add richer mood themes
+- add movie or book suggestions
+- personalize results by time of day
+- generate more nuanced AI summaries
+- save mood history for cities
+- share mood cards on social media
 
-## Demo Pitch Ngắn
+## Short Demo Pitch
 
-MoodMap biến dữ liệu API thành một trải nghiệm cảm xúc dễ hiểu và đẹp mắt. Thay vì chỉ hiển thị thời tiết, app kể cho người dùng biết "thành phố hôm nay cảm thấy như thế nào" và gợi ý cách tận hưởng ngày đó qua nhạc, quote và hoạt động phù hợp.
+MoodMap turns raw API data into an emotional, easy-to-understand, and visually appealing experience. Instead of showing only the weather, the app tells users how a city "feels" today and suggests ways to enjoy the day through music, quotes, and matching activities.
 
 ## License
 

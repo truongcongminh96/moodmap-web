@@ -14,11 +14,15 @@ interface MoodOverviewCardProps {
   data: MoodPackData;
   healingMessage?: string | null;
   isHealingActive: boolean;
+  localTimeLabel: string;
+  localTimeValue: string;
   moodThemeLabel: string;
   onHealingEnter: () => void;
   onHealingLeave: () => void;
   sceneLabel: string;
   sceneModeLabel: string;
+  timeOfDayLabel: string;
+  timeOfDayNote: string;
 }
 
 function formatConfidence(value: number | undefined, fallback: string) {
@@ -58,11 +62,15 @@ export function MoodOverviewCard({
   data,
   healingMessage,
   isHealingActive,
+  localTimeLabel,
+  localTimeValue,
   moodThemeLabel,
   onHealingEnter,
   onHealingLeave,
   sceneLabel,
   sceneModeLabel,
+  timeOfDayLabel,
+  timeOfDayNote,
 }: MoodOverviewCardProps) {
   const location = data.location;
   const mood = data.mood;
@@ -102,6 +110,17 @@ export function MoodOverviewCard({
             {mood?.label ?? copy.common.pendingMood}
           </Title>
           <Paragraph className="overview-summary">{summary}</Paragraph>
+
+          <div className="time-signal-strip">
+            <Text className="time-signal-kicker">{copy.timeOfDay.kicker}</Text>
+            <div className="time-signal-main">
+              <Text className="time-signal-pill">{timeOfDayLabel}</Text>
+              <Text className="time-signal-note">{timeOfDayNote}</Text>
+            </div>
+            <Text className="time-signal-clock">
+              {localTimeLabel} · {localTimeValue}
+            </Text>
+          </div>
 
           <div className="metric-grid">
             <div className="metric-tile">
@@ -151,7 +170,6 @@ export function MoodOverviewCard({
           </div>
         </div>
       </div>
-
     </Card>
   );
 }

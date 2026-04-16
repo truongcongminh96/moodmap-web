@@ -3,6 +3,28 @@ import { getUiCopy, type LocaleCode } from "./translations";
 
 const STORAGE_KEY = "moodmap-locale";
 
+function detectBrowserLocale(): LocaleCode {
+  if (typeof window === "undefined") {
+    return "en";
+  }
+
+  const languageCandidates = [window.navigator.language, ...(window.navigator.languages ?? [])]
+    .filter((value): value is string => Boolean(value))
+    .map((value) => value.toLowerCase());
+
+  const hasVietnameseLanguage = languageCandidates.some(
+    (value) => value === "vi" || value.startsWith("vi-") || value.endsWith("-vn"),
+  );
+
+  if (hasVietnameseLanguage) {
+    return "vi";
+  }
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone?.toLowerCase() ?? "";
+
+  return timezone === "asia/ho_chi_minh" ? "vi" : "en";
+}
+
 function getInitialLocale(): LocaleCode {
   if (typeof window === "undefined") {
     return "en";
@@ -10,7 +32,7 @@ function getInitialLocale(): LocaleCode {
 
   const saved = window.localStorage.getItem(STORAGE_KEY);
 
-  return saved === "vi" || saved === "en" ? saved : "en";
+  return saved === "vi" || saved === "en" ? saved : detectBrowserLocale();
 }
 
 export function useLocale() {
@@ -22,6 +44,7 @@ export function useLocale() {
     }
 
     window.localStorage.setItem(STORAGE_KEY, locale);
+    document.documentElement.lang = locale;
   }, [locale]);
 
   const copy = useMemo(() => getUiCopy(locale), [locale]);

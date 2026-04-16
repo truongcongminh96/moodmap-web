@@ -3,13 +3,14 @@ import {
   BgColorsOutlined,
   EnvironmentOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Select } from "antd";
-import type { FormEvent } from "react";
+import { AutoComplete, Button, Input, Select } from "antd";
+import { useMemo, useState, type FormEvent } from "react";
 import type { UiCopy } from "../i18n/translations";
 import type { MoodSceneSelection } from "../theme/moodScene";
 
 interface SearchBarProps {
   city: string;
+  citySuggestions: ReadonlyArray<string>;
   copy: UiCopy;
   loading: boolean;
   sceneMenuOpen: boolean;
@@ -23,6 +24,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   city,
+  citySuggestions,
   copy,
   loading,
   sceneMenuOpen,
@@ -33,6 +35,25 @@ export function SearchBar({
   onMoodSceneChange,
   onSubmit,
 }: SearchBarProps) {
+  const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
+
+  const cityOptions = useMemo(() => {
+    const normalizedQuery = city.trim().toLocaleLowerCase();
+
+    const filteredSuggestions = citySuggestions.filter((option) => {
+      if (!normalizedQuery) {
+        return true;
+      }
+
+      return option.toLocaleLowerCase().includes(normalizedQuery);
+    });
+
+    return filteredSuggestions.map((option) => ({
+      value: option,
+      label: option,
+    }));
+  }, [city, citySuggestions]);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
@@ -41,16 +62,33 @@ export function SearchBar({
   return (
     <div className="search-shell">
       <form className="search-form" onSubmit={handleSubmit}>
-        <Input
-          aria-label={copy.search.cityAriaLabel}
-          className="search-input"
+        <AutoComplete
+          className="search-input-autocomplete"
+          dropdownMatchSelectWidth={false}
+          open={isCityMenuOpen && cityOptions.length > 0}
+          options={cityOptions}
+          popupClassName="search-input-dropdown"
           value={city}
-          onChange={(event) => onCityChange(event.target.value)}
-          placeholder={copy.search.cityPlaceholder}
-          prefix={<EnvironmentOutlined />}
-          autoComplete="off"
-          allowClear
-        />
+          onBlur={() => setIsCityMenuOpen(false)}
+          onChange={(value) => onCityChange(value)}
+          onFocus={() => setIsCityMenuOpen(true)}
+          onSelect={(value) => {
+            onCityChange(value);
+            setIsCityMenuOpen(false);
+          }}
+        >
+          <Input
+            aria-label={copy.search.cityAriaLabel}
+            className="search-input"
+            value={city}
+            onChange={(event) => onCityChange(event.target.value)}
+            onClick={() => setIsCityMenuOpen(true)}
+            placeholder={copy.search.cityPlaceholder}
+            prefix={<EnvironmentOutlined />}
+            autoComplete="off"
+            allowClear
+          />
+        </AutoComplete>
         <Select
           aria-label={copy.search.sceneAriaLabel}
           className="scene-select"

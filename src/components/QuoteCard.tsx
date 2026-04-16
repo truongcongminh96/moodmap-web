@@ -11,16 +11,25 @@ interface QuoteCardProps {
 
 export function QuoteCard({ copy, quote }: QuoteCardProps) {
   return (
-    <Card bordered={false} className="glass-card quote-card fade-up delay-4">
-      <Text className="card-kicker">{copy.quote.kicker}</Text>
+    <Card bordered={false} className="glass-card quote-card quote-editorial-card fade-up delay-4">
+      <div className="quote-editorial-topline">
+        <Text className="card-kicker">{copy.quote.kicker}</Text>
+        <span className="quote-editorial-rule" />
+      </div>
 
       <div className="quote-shell">
         <span className="quote-mark">“</span>
-        <blockquote className="quote-block">
+        <blockquote className="quote-block quote-block-editorial">
           <Paragraph className="quote-text">
             {quote?.text ?? copy.quote.fallbackText}
           </Paragraph>
-          <Text className="quote-author">— {quote?.author ?? copy.common.unknownAuthor}</Text>
+
+          <div className="quote-credit">
+            <span className="quote-credit-line" />
+            <Text className="quote-author">
+              {quote?.author ?? copy.common.unknownAuthor}
+            </Text>
+          </div>
         </blockquote>
       </div>
     </Card>

@@ -8,6 +8,7 @@ const { Paragraph, Text, Title } = Typography;
 
 interface HeroSectionProps {
   city: string;
+  citySuggestions: ReadonlyArray<string>;
   loading: boolean;
   locale: LocaleCode;
   copy: UiCopy;
@@ -26,6 +27,7 @@ interface HeroSectionProps {
 
 export function HeroSection({
   city,
+  citySuggestions,
   loading,
   locale,
   copy,
@@ -78,6 +80,7 @@ export function HeroSection({
 
       <SearchBar
         city={city}
+        citySuggestions={citySuggestions}
         copy={copy}
         loading={loading}
         sceneMenuOpen={sceneMenuOpen}
