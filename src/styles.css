@@ -3129,6 +3129,79 @@ a {
   }
 }
 
+@media (max-height: 840px) {
+  .page-content {
+    padding-top: 24px;
+    padding-bottom: 56px;
+  }
+
+  .hero-section {
+    padding-top: 26px;
+    padding-bottom: 24px;
+  }
+
+  .hero-topbar {
+    position: static;
+    margin-bottom: 18px;
+    justify-content: center;
+  }
+
+  .hero-control-rail {
+    justify-content: center;
+  }
+
+  .hero-eyebrow.ant-typography {
+    margin-bottom: 10px;
+  }
+
+  .hero-title.ant-typography {
+    font-size: clamp(3.4rem, 8vw, 5.1rem) !important;
+  }
+
+  .hero-subtitle.ant-typography {
+    margin-bottom: 22px !important;
+    line-height: 1.55;
+  }
+
+  .hero-scene-panel {
+    margin-top: 14px;
+  }
+}
+
+@media (max-height: 760px) {
+  .page-content {
+    padding-top: 18px;
+    padding-bottom: 44px;
+  }
+
+  .hero-section {
+    padding-top: 14px;
+    padding-bottom: 18px;
+  }
+
+  .hero-control-rail {
+    gap: 10px;
+  }
+
+  .live-badge.ant-tag {
+    padding: 10px 14px 10px 16px;
+  }
+
+  .hero-subtitle.ant-typography {
+    margin-bottom: 16px !important;
+    font-size: 0.98rem;
+  }
+
+  .search-shell {
+    padding: 8px;
+  }
+
+  .hero-scene-panel {
+    gap: 8px;
+    margin-top: 10px;
+  }
+}
+
 @media (max-width: 560px) {
   .hero-section {
     padding-top: 18px;
