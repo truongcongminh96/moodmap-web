@@ -2985,6 +2985,11 @@ a {
     animation: none !important;
   }
 
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .page-motion-root,
   .page-motion-root > *,
   .mood-reveal-overlay,
@@ -2992,6 +2997,59 @@ a {
   .music-item,
   .activity-row {
     transition: none !important;
+  }
+
+  .page-motion-root.is-reveal-blocking > :not(.mood-reveal-overlay),
+  .page-motion-root.is-reveal-exiting > :not(.mood-reveal-overlay) {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .mood-reveal-overlay {
+    padding: 24px;
+  }
+
+  .mood-reveal-overlay-loading,
+  .mood-reveal-overlay-holding {
+    opacity: 0.94;
+  }
+
+  .mood-reveal-overlay::before {
+    background:
+      radial-gradient(circle at 50% 28%, rgba(var(--accent-rgb), 0.12), transparent 34%),
+      linear-gradient(180deg, rgba(3, 6, 12, 0.74), rgba(3, 6, 12, 0.84));
+  }
+
+  .mood-reveal-overlay__grain {
+    opacity: 0.1;
+  }
+
+  .mood-reveal-overlay__content {
+    gap: 10px;
+    opacity: 1;
+    transform: none;
+  }
+
+  .ambient-orb {
+    opacity: 0.52;
+    filter: blur(52px);
+  }
+
+  .ambient-grid {
+    opacity: 0.1;
+  }
+
+  .hero-glow {
+    opacity: 0.72;
+    filter: blur(14px);
+  }
+
+  .glass-card.ant-card:hover,
+  .search-shell:focus-within,
+  .search-button.ant-btn:not(:disabled):hover,
+  .locale-pill:hover {
+    transform: none;
   }
 }
 
